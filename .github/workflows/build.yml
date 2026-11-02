@@ -19,7 +19,7 @@ jobs:
         with:
           gradle-version: '8.7'
 
-            - name: unpack
+      - name: unpack
         shell: bash
         run: |
           unzip -o BowlMod-InGame.zip
@@ -28,10 +28,8 @@ jobs:
           import sys
           p = sys.argv[1]
           s = open(p).read()
-          s = s.replace("import android.view.MotionEvent;",
-                        "import android.view.InputDevice;\nimport android.view.MotionEvent;")
-          s = s.replace("MotionEvent.SOURCE_TOUCHSCREEN",
-                        "InputDevice.SOURCE_TOUCHSCREEN")
+          s = s.replace("import android.view.MotionEvent;", "import android.view.InputDevice;\nimport android.view.MotionEvent;")
+          s = s.replace("MotionEvent.SOURCE_TOUCHSCREEN", "InputDevice.SOURCE_TOUCHSCREEN")
           open(p, "w").write(s)
           EOF
           grep -n "InputDevice" "$F"
